@@ -1,6 +1,6 @@
 {
 	"name": "cdkoutputs2sh",
-	"version": "0.0.1",
+	"version": "0.0.2-rc1",
 	"description": "",
 	"type": "module",
 	"module": "./dist/main.js",
