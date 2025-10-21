@@ -1,2 +1,5 @@
 onlyBuiltDependencies:
   - esbuild
+
+overrides:
+  cdkoutputs2sh: 'link:'

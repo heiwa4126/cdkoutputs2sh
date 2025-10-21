@@ -1,3 +1,3 @@
-import { greet } from "project1";
+import { greet } from "cdkoutputs2sh";
 
 console.log(greet());
