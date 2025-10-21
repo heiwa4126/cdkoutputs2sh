@@ -6,3 +6,7 @@ example/
 biome.jsonc
 pnpm-workspace.yaml
 *.tgz
+test/
+var/
+.vscode/
+tsconfig.json

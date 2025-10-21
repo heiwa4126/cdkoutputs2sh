@@ -1,8 +1,8 @@
 {
-  "AwsCdkP0Stack": {
-    "ElasticIPOutput": "16.209.28.160",
-    "InstanceId": "i-0fb637dc69e38f65d",
-    "SessionManagerCommand": "aws ssm start-session --target i-0fb637dc69e38f65d",
-    "FastAPIEndpoint": "http://16.209.28.160:8080"
-  }
+	"AwsCdkP0Stack": {
+		"ElasticIPOutput": "16.209.28.160",
+		"InstanceId": "i-0fb637dc69e38f65d",
+		"SessionManagerCommand": "aws ssm start-session --target i-0fb637dc69e38f65d",
+		"FastAPIEndpoint": "http://16.209.28.160:8080"
+	}
 }

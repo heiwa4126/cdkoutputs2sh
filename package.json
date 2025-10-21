@@ -1,14 +1,14 @@
 {
 	"name": "cdkoutputs2sh",
-	"version": "1.0.0",
-	"description": "tsup test",
+	"version": "0.0.1",
+	"description": "",
 	"type": "module",
-	"module": "./dist/index.js",
-	"types": "./dist/index.d.ts",
+	"module": "./dist/main.js",
+	"types": "./dist/main.d.ts",
 	"exports": {
 		".": {
-			"types": "./dist/index.d.ts",
-			"import": "./dist/index.js"
+			"types": "./dist/main.d.ts",
+			"import": "./dist/main.js"
 		}
 	},
 	"bin": {
@@ -25,8 +25,9 @@
 		"lint:full": "biome lint . --fix && shopt -s globstar && tsc --noEmit src/**/*.ts",
 		"format": "biome format --write .",
 		"format:full": "npm pkg fix && biome format --write . && dprint fmt && textlint --fix \"**/*.md\"",
-		"ex1": "node ./example/ex1.mjs && tsx ./example/ex1.ts",
-		"smoketest": "npm run ex1"
+		"smoketest": "node dist/main.js -h",
+		"security": "trivy fs --skip-dirs node_modules,cdk.out . && trivy config --skip-dirs node_modules,cdk.out .",
+		"audit": "pnpm audit && trivy fs --scanners vuln package.json"
 	},
 	"keywords": [
 		"hello-world",

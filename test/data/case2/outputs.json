@@ -1,5 +1,5 @@
 {
-  "CdkLambdaUrls1Stack": {
-    "Lambda1FunctionUrl": "https://jtyihp4ixrrokrxktnmg75lufm0ptvcv.lambda-url.ap-northeast-3.on.aws/"
-  }
+	"CdkLambdaUrls1Stack": {
+		"Lambda1FunctionUrl": "https://jtyihp4ixrrokrxktnmg75lufm0ptvcv.lambda-url.ap-northeast-3.on.aws/"
+	}
 }

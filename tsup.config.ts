@@ -1,7 +1,7 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-	entry: ["src/index.ts", "src/main.ts"],
+	entry: ["src/main.ts"],
 	format: ["esm"],
 	outDir: "dist",
 	bundle: false,
@@ -11,6 +11,6 @@ export default defineConfig({
 	clean: true,
 	dts: {
 		resolve: true,
-		entry: ["src/index.ts"],
+		entry: ["src/main.ts"],
 	},
 });
