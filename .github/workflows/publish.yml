@@ -27,23 +27,23 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@fe02b34f77f8bc703788d5817da081398fad5dd2 # v4.0.0
+      # with:
+      #   version: latest # package.json の packageManagerを使うので不要
+
       - name: Setup Node.js (with npm cache)
         uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
           node-version: "20"
           registry-url: "https://registry.npmjs.org"
           token: "" # .npmrc へ token を書かせない(OIDC を確実に使う)
-          cache: "npm" # npm のダウンロードキャッシュを有効化
+          cache: pnpm
       # cache-dependency-path: |
       #   package-lock.json # 複数パスがある場合は明示(monorepo 等)
 
       - name: Use latest npm supporting OIDC provenance
-        run: npm i -g npm@latest # npm を 11.5.1+ に
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@fe02b34f77f8bc703788d5817da081398fad5dd2 # v4.0.0
-      # with:
-      #   version: latest # package.json の packageManagerを使うので不要
+        run: pnpm i -g npm@latest # npm を 11.5.1+ に
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
