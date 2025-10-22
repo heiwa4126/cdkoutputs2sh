@@ -33,7 +33,7 @@ jobs:
           node-version: "20"
           registry-url: "https://registry.npmjs.org"
           token: "" # .npmrc へ token を書かせない(OIDC を確実に使う)
-          cache: pnpm
+          cache: npm
       # cache-dependency-path: |
       #   package-lock.json # 複数パスがある場合は明示(monorepo 等)
 
