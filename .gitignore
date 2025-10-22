@@ -240,3 +240,4 @@ tmp
 Thumbs.db
 
 var/
+*.Identifier
