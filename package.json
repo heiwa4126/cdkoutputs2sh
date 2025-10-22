@@ -32,15 +32,11 @@
 		"audit": "npm audit && trivy fs --scanners vuln package.json"
 	},
 	"keywords": [
-		"hello-world",
-		"example",
-		"demo",
-		"typescript",
-		"esm",
-		"commonjs",
+		"awscdk",
+		"utility",
 		"cli",
+		"typescript",
 		"tsup",
-		"learning",
 		"sigstore",
 		"trusted-publishing",
 		"github-actions"
