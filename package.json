@@ -1,7 +1,7 @@
 {
 	"name": "cdkoutputs2sh",
 	"version": "0.0.2-rc2",
-	"description": "",
+	"description": "CLI tool and library that converts AWS CDK stack output JSON files into sourceable shell environment variable export scripts",
 	"type": "module",
 	"module": "./dist/main.js",
 	"types": "./dist/main.d.ts",
