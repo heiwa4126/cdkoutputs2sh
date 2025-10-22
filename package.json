@@ -47,6 +47,9 @@
 		"url": "git+https://github.com/heiwa4126/cdkoutputs2sh.git"
 	},
 	"license": "MIT",
+	"engines": {
+		"node": ">=18"
+	},
 	"packageManager": "npm@10.18.3",
 	"devDependencies": {
 		"@types/node": "^24.9.1",
