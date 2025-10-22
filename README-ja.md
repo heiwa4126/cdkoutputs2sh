@@ -5,7 +5,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-18%2B-green.svg)](https://nodejs.org/)
 
-日本語 | [English](README.md)
+[English](https://github.com/heiwa4126/cdkoutputs2sh/blob/main/README.md) | 日本語
 
 cdkoutputs2sh
 は
