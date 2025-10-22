@@ -24,7 +24,7 @@
 		"test:run": "vitest run",
 		"test:watch": "vitest --watch",
 		"lint": "biome lint .",
-		"lint:full": "biome lint . --fix && shopt -s globstar && tsc --noEmit src/**/*.ts",
+		"lint:full": "biome lint . --fix && tsc --noEmit && actionlint -verbose",
 		"format": "biome format --write .",
 		"format:full": "npm pkg fix && biome format --write . && dprint fmt && textlint --fix \"**/*.md\"",
 		"smoketest": "node dist/main.js -h",
