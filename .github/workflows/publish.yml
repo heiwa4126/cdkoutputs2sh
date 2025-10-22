@@ -37,7 +37,7 @@ jobs:
         with:
           node-version: "20"
           registry-url: "https://registry.npmjs.org"
-          token: "" # .npmrc へ token を書かせない(OIDC を確実に使う)
+          # token: "" # .npmrc へ token を書かせない(OIDC を確実に使う)
           cache: pnpm
       # cache-dependency-path: |
       #   package-lock.json # 複数パスがある場合は明示(monorepo 等)
@@ -72,7 +72,7 @@ jobs:
           echo "Is prerelease: $is_prerelease"
 
       - name: Publish to npm via OIDC (Trusted publishing)
-        env:
-          NODE_AUTH_TOKEN: "" # 念のため publish 前も空
+        # env:
+        #   NODE_AUTH_TOKEN: "" # 念のため publish 前も空
         run: npm publish --access public ${{ steps.check-prerelease.outputs.tag_option }}
         # Trusted publishing を使うと provenance は自動生成されるので --provenance は不要
