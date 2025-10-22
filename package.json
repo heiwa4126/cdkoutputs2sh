@@ -15,9 +15,11 @@
 		"cdkoutputs2sh": "dist/main.js"
 	},
 	"scripts": {
-		"init": "pnpm i && pnpm run build && pnpm run link",
+		"init": "npm i && npm run build && npm run link",
+		"prepublishOnly": "npm run clean && npm run build && npm run test:run && npm run smoketest",
+		"clean": "rm -rf dist",
 		"build": "tsup",
-		"link": "mkdir -p node_modules && ln -sfn ../dist node_modules/cdkoutputs2sh",
+		"link": "mkdir -p node_modules && ln -sfn ../ node_modules/cdkoutputs2sh",
 		"test": "vitest run",
 		"test:run": "vitest run",
 		"test:watch": "vitest --watch",
@@ -27,7 +29,7 @@
 		"format:full": "npm pkg fix && biome format --write . && dprint fmt && textlint --fix \"**/*.md\"",
 		"smoketest": "node dist/main.js -h",
 		"security": "trivy fs --skip-dirs node_modules,cdk.out . && trivy config --skip-dirs node_modules,cdk.out .",
-		"audit": "pnpm audit && trivy fs --scanners vuln package.json"
+		"audit": "npm audit && trivy fs --scanners vuln package.json"
 	},
 	"keywords": [
 		"hello-world",
@@ -49,7 +51,7 @@
 		"url": "git+https://github.com/heiwa4126/cdkoutputs2sh.git"
 	},
 	"license": "MIT",
-	"packageManager": "pnpm@10.18.3",
+	"packageManager": "npm@10.18.3",
 	"devDependencies": {
 		"@types/node": "^24.9.1",
 		"tsup": "^8.5.0",

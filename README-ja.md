@@ -91,9 +91,9 @@ console.log(mapping["AWSCDKP0STACK_INSTANCEID"]);
 レポジトリからクローン後
 
 ```sh
-pnpm run init  # `pnpm init` ではない. run-scripts参照
-pnpm run smoketest # help が 表示される
-pnpm test # Vitest によるケース検証
+npm run init  # `npm init` ではない. run-scripts参照
+npm run smoketest # help が 表示される
+npm test # Vitest によるケース検証
 ```
 
 ## ライセンス

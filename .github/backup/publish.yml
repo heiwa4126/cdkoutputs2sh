@@ -30,22 +30,45 @@ jobs:
       - name: Setup Node.js (with npm cache)
         uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
-          node-version: "20"
+          node-version: "22"
           registry-url: "https://registry.npmjs.org"
           token: "" # .npmrc へ token を書かせない(OIDC を確実に使う)
-          cache: "npm" # npm のダウンロードキャッシュを有効化
+          cache: npm
       # cache-dependency-path: |
       #   package-lock.json # 複数パスがある場合は明示(monorepo 等)
 
       - name: Use latest npm supporting OIDC provenance
-        run: npm i -g npm@latest # npm を 11.5.1+ に
+        run: pnpm i -g npm@latest # npm を 11.5.1+ に
 
-      - name: Install dependencies (npm ci)
-        run: npm ci
+      - name: Setup pnpm
+        uses: pnpm/action-setup@fe02b34f77f8bc703788d5817da081398fad5dd2 # v4.0.0
+      # with:
+      #   version: latest # package.json の packageManagerを使うので不要
 
-      # - run: npm run build --if-present
-      # - run: npm test
-      ## このプロジェクトでは prepublishOnly に書いてあるので不要
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # ========== デバッグ用ステップを追加 ==========
+      - name: Debug - Check .npmrc
+        run: |
+          echo "=== .npmrc content ==="
+          cat ~/.npmrc || echo "~/.npmrc not found"
+          cat .npmrc || echo "./.npmrc not found"
+          echo "=== NPM config ==="
+          npm config list
+          echo "=== Environment variables ==="
+          env | grep -i npm || true
+          env | grep -i node || true
+          echo "=== OIDC token available? ==="
+          if [ -n "$ACTIONS_ID_TOKEN_REQUEST_URL" ]; then
+            echo "OIDC is available"
+          else
+            echo "OIDC is NOT available"
+          fi
+
+      - run: pnpm run build
+      - run: pnpm run test
+      - run: pnpm run smoketest
 
       - name: Check if prerelease version
         id: check-prerelease

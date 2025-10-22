@@ -89,9 +89,9 @@ console.log(mapping["AWSCDKP0STACK_INSTANCEID"]);
 After cloning the repository:
 
 ```sh
-pnpm run init  # Not `pnpm init`. See run-scripts
-pnpm run smoketest # Shows help message
-pnpm test # Vitest test cases
+npm run init  # Not `npm init`. See run-scripts
+npm run smoketest # Shows help message
+npm test # Vitest test cases
 ```
 
 ## License
