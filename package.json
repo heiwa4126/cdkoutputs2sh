@@ -15,8 +15,8 @@
 		"cdkoutputs2sh": "dist/main.js"
 	},
 	"scripts": {
-		"init": "npm i && npm run build && npm run link",
-		"prepublishOnly": "npm run clean && npm run build && npm run test:run && npm run smoketest",
+		"init": "pnpm i && pnpm run build && pnpm run link",
+		"prepublishOnly": "pnpm run clean && pnpm run build && pnpm run test:run && pnpm run smoketest",
 		"clean": "rm -rf dist",
 		"build": "tsup",
 		"link": "mkdir -p node_modules && ln -sfn ../ node_modules/cdkoutputs2sh",
@@ -26,10 +26,10 @@
 		"lint": "biome lint .",
 		"lint:full": "biome lint . --fix && tsc --noEmit && actionlint -verbose",
 		"format": "biome format --write .",
-		"format:full": "npm pkg fix && biome format --write . && dprint fmt && textlint --fix \"**/*.md\"",
+		"format:full": "pnpm pkg fix && biome format --write . && dprint fmt && textlint --fix \"**/*.md\"",
 		"smoketest": "node dist/main.js -h",
 		"security": "trivy fs --skip-dirs node_modules,cdk.out . && trivy config --skip-dirs node_modules,cdk.out .",
-		"audit": "npm audit && trivy fs --scanners vuln package.json"
+		"audit": "pnpm audit && trivy fs --scanners vuln package.json"
 	},
 	"keywords": [
 		"awscdk",
@@ -50,11 +50,10 @@
 	"engines": {
 		"node": ">=18"
 	},
-	"packageManager": "npm@10.18.3",
 	"devDependencies": {
-		"@types/node": "^24.9.1",
-		"tsup": "^8.5.0",
-		"tsx": "^4.20.6",
+		"@types/node": "^24.12.0",
+		"tsup": "^8.5.1",
+		"tsx": "^4.21.0",
 		"typescript": "^5.9.3",
 		"vitest": "^3.2.4"
 	}
