@@ -75,9 +75,9 @@ npm install -D cdkoutputs2sh
 import { convertCdkOutputs } from "cdkoutputs2sh";
 
 const { exportBlock, mapping } = convertCdkOutputs({
-  input: "var/outputs.json",
-  output: "var/outputs.sh",
-  verbose: 1,
+	input: "var/outputs.json",
+	output: "var/outputs.sh",
+	verbose: 1,
 });
 
 console.log(exportBlock);

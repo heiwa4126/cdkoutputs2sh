@@ -2,6 +2,25 @@
 	"name": "cdkoutputs2sh",
 	"version": "0.0.2",
 	"description": "CLI tool and library that converts AWS CDK stack output JSON files into sourceable shell environment variable export scripts",
+	"keywords": [
+		"awscdk",
+		"cli",
+		"github-actions",
+		"sigstore",
+		"trusted-publishing",
+		"tsup",
+		"typescript",
+		"utility"
+	],
+	"license": "MIT",
+	"author": "heiwa4126 <heiwa4126@gmail.com>",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/heiwa4126/cdkoutputs2sh.git"
+	},
+	"bin": {
+		"cdkoutputs2sh": "dist/main.js"
+	},
 	"type": "module",
 	"module": "./dist/main.js",
 	"types": "./dist/main.d.ts",
@@ -11,50 +30,35 @@
 			"import": "./dist/main.js"
 		}
 	},
-	"bin": {
-		"cdkoutputs2sh": "dist/main.js"
-	},
 	"scripts": {
+		"preinstall": "pnpm audit",
 		"init": "pnpm i && pnpm run build && pnpm run link",
-		"prepublishOnly": "pnpm run clean && pnpm run build && pnpm run test:run && pnpm run smoketest",
+		"prepublishOnly": "pnpm run clean && pnpm run build && pnpm run test:run && pnpm run smoke-test",
 		"clean": "rm -rf dist",
 		"build": "tsup",
 		"link": "mkdir -p node_modules && ln -sfn ../ node_modules/cdkoutputs2sh",
 		"test": "vitest run",
 		"test:run": "vitest run",
 		"test:watch": "vitest --watch",
-		"lint": "biome lint .",
-		"lint:full": "biome lint . --fix && tsc --noEmit && actionlint -verbose",
-		"format": "biome format --write .",
-		"format:full": "pnpm pkg fix && biome format --write . && dprint fmt && textlint --fix \"**/*.md\"",
-		"smoketest": "node dist/main.js -h",
+		"format": "oxfmt",
+		"format:all": "pnpm pkg fix --loglevel=error && oxfmt",
+		"lint": "oxlint",
+		"lint:all": "oxlint && tsc --noEmit && actionlint -verbose",
+		"check": "oxfmt && oxlint --fix",
+		"smoke-test": "node dist/main.js -h",
 		"security": "trivy fs --skip-dirs node_modules,cdk.out . && trivy config --skip-dirs node_modules,cdk.out .",
 		"audit": "pnpm audit && trivy fs --scanners vuln package.json"
 	},
-	"keywords": [
-		"awscdk",
-		"utility",
-		"cli",
-		"typescript",
-		"tsup",
-		"sigstore",
-		"trusted-publishing",
-		"github-actions"
-	],
-	"author": "heiwa4126 <heiwa4126@gmail.com>",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/heiwa4126/cdkoutputs2sh.git"
-	},
-	"license": "MIT",
-	"engines": {
-		"node": ">=18"
-	},
 	"devDependencies": {
-		"@types/node": "^25.5.0",
+		"@types/node": "^25.5.2",
+		"oxfmt": "^0.44.0",
+		"oxlint": "^1.59.0",
 		"tsup": "^8.5.1",
 		"tsx": "^4.21.0",
 		"typescript": "^6.0.2",
-		"vitest": "^4.1.2"
+		"vitest": "^4.1.3"
+	},
+	"engines": {
+		"node": ">=18"
 	}
 }

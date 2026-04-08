@@ -5,7 +5,23 @@
 
 version: 2
 updates:
-  - package-ecosystem: "npm" # See documentation for possible values
+  - package-ecosystem: npm # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
-      interval: "monthly"
+      interval: monthly
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
+    cooldown:
+      default-days: 7
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
+    cooldown:
+      default-days: 7

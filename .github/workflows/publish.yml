@@ -1,5 +1,5 @@
 name: Publish to npm
-
+# Direct publishing to npmjs from GitHub using pnpm and npm with OIDC Trusted Publishing
 on:
   push:
     tags:
@@ -8,66 +8,39 @@ on:
       # プリリリースのみ: 例) v1.2.3-rc.1, v1.2.3-beta など(必ず '-' が付く)
       - "v[0-9]+.[0-9]+.[0-9]+-*"
 
+defaults:
+  run:
+    shell: bash
+
 concurrency:
   group: publish-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  publish:
-    # Only run if pushed by repository owner
+  osv-scan:
     if: github.repository_owner == github.actor
+    ## Only run if pushed by repository owner
+    uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml@c51854704019a247608d928f370c98740469d4b5 # v2.3.5
+    permissions:
+      actions: read # reusable workflow の実行に必要
+      security-events: write # 脆弱性スキャン結果(SARIF形式)を  GitHub の Security タブにアップロードするために必要
+      contents: read # リポジトリの内容を読み取るために必要
+    with:
+      scan-args: "-L ./pnpm-lock.yaml"
+
+  publish:
+    timeout-minutes: 10
+    if: github.repository_owner == github.actor
+    ## Only run if pushed by repository owner and after OSV scan passes...
+    needs: osv-scan
     runs-on: ubuntu-latest
     environment: npmjs
     permissions:
       contents: read
+      # contents: write # for releases
       id-token: write # OIDC に必須
     steps:
-      - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - name: Build and Publish
+        uses: heiwa4126/reusable-workflows/build-pnpm-package-and-publish@3a81d77b668105e8e3979c26fa68befcc3dfce6e # v0.0.11
         with:
-          fetch-depth: 1
-
-      - name: Setup Node.js (with npm cache)
-        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
-        with:
-          node-version: "20"
-          registry-url: "https://registry.npmjs.org"
-          token: "" # .npmrc へ token を書かせない(OIDC を確実に使う)
-          cache: "npm" # npm のダウンロードキャッシュを有効化
-      # cache-dependency-path: |
-      #   package-lock.json # 複数パスがある場合は明示(monorepo 等)
-
-      - name: Use latest npm supporting OIDC provenance
-        run: npm i -g npm@latest # npm を 11.5.1+ に
-
-      - name: Install dependencies (npm ci)
-        run: npm ci
-
-      # - run: npm run build --if-present
-      # - run: npm test
-      ## このプロジェクトでは prepublishOnly に書いてあるので不要
-
-      - name: Check if prerelease version
-        id: check-prerelease
-        run: |
-          VERSION=$(npm pkg get version --silent | tr -d '"')
-          # ハイフン(SemVerのprerelease区切り)が含まれているかで判定
-          if [[ $VERSION == *-* ]]; then
-            is_prerelease=true;  tag_option="--tag dev"
-          else
-            is_prerelease=false; tag_option=""
-          fi
-          # まとめて GITHUB_OUTPUT に書き出す
-          {
-            echo "is_prerelease=$is_prerelease"
-            echo "tag_option=$tag_option"
-          } >> "$GITHUB_OUTPUT"
-          # ログ用出力
-          echo "Version: $VERSION"
-          echo "Is prerelease: $is_prerelease"
-
-      - name: Publish to npm via OIDC (Trusted publishing)
-        env:
-          NODE_AUTH_TOKEN: "" # 念のため publish 前も空
-        run: npm publish --access public ${{ steps.check-prerelease.outputs.tag_option }}
-        # Trusted publishing を使うと provenance は自動生成されるので --provenance は不要
+          checkout: true
