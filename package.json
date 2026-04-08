@@ -35,7 +35,7 @@
 		"init": "pnpm i && pnpm run build && pnpm run link",
 		"prepublishOnly": "pnpm run clean && pnpm run build && pnpm run test:run && pnpm run smoke-test",
 		"clean": "rm -rf dist",
-		"build": "tsup",
+		"build": "tsdown",
 		"link": "mkdir -p node_modules && ln -sfn ../ node_modules/cdkoutputs2sh",
 		"test": "vitest run",
 		"test:run": "vitest run",
@@ -53,7 +53,7 @@
 		"@types/node": "^25.5.2",
 		"oxfmt": "^0.44.0",
 		"oxlint": "^1.59.0",
-		"tsup": "^8.5.1",
+		"tsdown": "^0.21.7",
 		"tsx": "^4.21.0",
 		"typescript": "^6.0.2",
 		"vitest": "^4.1.3"
