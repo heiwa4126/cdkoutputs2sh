@@ -50,8 +50,8 @@
 		"audit": "pnpm audit && trivy fs --scanners vuln package.json"
 	},
 	"devDependencies": {
-		"@types/node": "^25.5.2",
-		"oxfmt": "^0.52.0",
+		"@types/node": "^26.0.0",
+		"oxfmt": "^0.56.0",
 		"oxlint": "^1.59.0",
 		"tsdown": "^0.22.0",
 		"tsx": "^4.21.0",
