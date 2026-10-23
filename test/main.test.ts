@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
