@@ -77,7 +77,7 @@ import { convertCdkOutputs } from "cdkoutputs2sh";
 const { exportBlock, mapping } = convertCdkOutputs({
 	input: "var/outputs.json",
 	output: "var/outputs.sh",
-	verbose: 1,
+	verbose: 1
 });
 
 console.log(exportBlock);
@@ -91,7 +91,7 @@ After cloning the repository:
 ```sh
 npm run init  # Not `npm init`. See run-scripts
 npm run smoketest # Shows help message
-npm test # Vitest test cases
+npm test # Run cases with node:test
 ```
 
 ## License

@@ -29,7 +29,7 @@ function parseArgs(argv: string[]): Options {
 		input: "var/outputs.json",
 		output: "var/outputs.sh",
 		failOnMissing: false,
-		verbose: 0,
+		verbose: 0
 	};
 	for (let i = 0; i < argv.length; i++) {
 		const a = argv[i];
@@ -45,7 +45,7 @@ function parseArgs(argv: string[]): Options {
 			opts.verbose = 2;
 		} else if (a === "--help" || a === "-h") {
 			console.log(
-				"Usage: cdkoutputs2sh [--input file] [--output file] [--fail-on-missing] [-v|-vv]\n",
+				"Usage: cdkoutputs2sh [--input file] [--output file] [--fail-on-missing] [-v|-vv]\n"
 			);
 			process.exit(0);
 		}
@@ -122,7 +122,7 @@ function iterExports(data: Record<string, unknown>, verbose: number): ExportItem
 				log(
 					"WARN",
 					`Skipping non-scalar output ${stack}.${key} (type=${Array.isArray(value) ? "array" : typeof value})`,
-					verbose,
+					verbose
 				);
 				continue;
 			}
@@ -135,7 +135,7 @@ function iterExports(data: Record<string, unknown>, verbose: number): ExportItem
 
 function buildExportLines(
 	data: Record<string, unknown>,
-	verbose: number,
+	verbose: number
 ): { exportBlock: string; mapping: Record<string, string> } {
 	const lines: string[] = [];
 	const used: Record<string, string> = {};
@@ -172,7 +172,7 @@ function writeShell(path: string, exportBlock: string, mapping: Record<string, s
 		"# Generated from AWS CDK outputs JSON. Do not edit manually.",
 		"# shellcheck disable=SC2034",
 		"# Source this file:",
-		"#   source var/outputs.sh",
+		"#   source var/outputs.sh"
 	];
 	const commentMap = Object.entries(mapping)
 		.sort(([a], [b]) => a.localeCompare(b))
@@ -191,7 +191,7 @@ export function convertCdkOutputs(options?: Partial<Options>): {
 		output: "var/outputs.sh",
 		failOnMissing: false,
 		verbose: 0,
-		...options,
+		...options
 	};
 	let data: Record<string, unknown>;
 	try {

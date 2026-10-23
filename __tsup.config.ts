@@ -12,6 +12,6 @@ export default defineConfig({
 	clean: true,
 	dts: {
 		resolve: true,
-		entry: ["src/main.ts"],
-	},
+		entry: ["src/main.ts"]
+	}
 });

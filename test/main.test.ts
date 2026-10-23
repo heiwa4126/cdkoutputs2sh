@@ -1,5 +1,6 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { describe, expect, it } from "vitest";
+import assert from "node:assert/strict";
+import { describe, it } from "node:test";
 import { convertCdkOutputs } from "../src/main.js";
 
 function normalizeNewlines(s: string): string {
@@ -13,7 +14,7 @@ function normalizeNewlines(s: string): string {
  */
 function testCdkOutputsConversion(
 	caseNumber: string,
-	options: { checkContainment?: boolean } = {},
+	options: { checkContainment?: boolean } = {}
 ) {
 	const jsonPath = `test/data/${caseNumber}/outputs.json`;
 	const expectedPath = `test/data/${caseNumber}/outputs.sh`;
@@ -34,11 +35,11 @@ function testCdkOutputsConversion(
 
 	// Optional containment check
 	if (options.checkContainment) {
-		expect(generated).toContain(exportBlock.split("\n")[0]);
+		assert.ok(generated.includes(exportBlock.split("\n")[0]));
 	}
 
 	// Ensure export block is not empty
-	expect(exportBlock.length).toBeGreaterThan(0);
+	assert.ok(exportBlock.length > 0);
 
 	// Compare export lines (ignoring order and comments)
 	const expectedExports = expected
@@ -53,7 +54,7 @@ function testCdkOutputsConversion(
 		.sort()
 		.join("\n");
 
-	expect(generatedExports).toBe(expectedExports);
+	assert.equal(generatedExports, expectedExports);
 }
 
 describe("cdkoutputs2sh", () => {

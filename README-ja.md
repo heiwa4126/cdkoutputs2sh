@@ -79,7 +79,7 @@ import { convertCdkOutputs } from "cdkoutputs2sh";
 const { exportBlock, mapping } = convertCdkOutputs({
 	input: "var/outputs.json",
 	output: "var/outputs.sh",
-	verbose: 1,
+	verbose: 1
 });
 
 console.log(exportBlock);
@@ -93,7 +93,7 @@ console.log(mapping["AWSCDKP0STACK_INSTANCEID"]);
 ```sh
 npm run init  # `npm init` ではない. run-scripts参照
 npm run smoketest # help が 表示される
-npm test # Vitest によるケース検証
+npm test # node:test によるケース検証
 ```
 
 ## ライセンス
