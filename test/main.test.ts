@@ -1,7 +1,7 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { convertCdkOutputs } from "../src/main.js";
+import { convertCdkOutputs } from "../src/main.ts";
 
 function normalizeNewlines(s: string): string {
 	return s.replace(/\r\n/g, "\n");

@@ -90,6 +90,8 @@ console.log(mapping["AWSCDKP0STACK_INSTANCEID"]);
 
 レポジトリからクローン後
 
+テストには、TypeScript のネイティブ実行に対応した Node.js 22.18.0 以降が必要です（Node.js 23 系では 23.6.0 以降）。
+
 ```sh
 npm run init  # `npm init` ではない. run-scripts参照
 npm run smoketest # help が 表示される

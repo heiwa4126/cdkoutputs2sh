@@ -88,6 +88,8 @@ console.log(mapping["AWSCDKP0STACK_INSTANCEID"]);
 
 After cloning the repository:
 
+Tests require Node.js 22.18.0 or later for native TypeScript execution (23.6.0 or later on Node.js 23).
+
 ```sh
 npm run init  # Not `npm init`. See run-scripts
 npm run smoketest # Shows help message
