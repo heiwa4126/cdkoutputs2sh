@@ -1,62 +1,62 @@
 {
-	"name": "cdkoutputs2sh",
-	"version": "0.0.2",
-	"description": "CLI tool and library that converts AWS CDK stack output JSON files into sourceable shell environment variable export scripts",
-	"keywords": [
-		"awscdk",
-		"cli",
-		"github-actions",
-		"sigstore",
-		"trusted-publishing",
-		"tsup",
-		"typescript",
-		"utility"
-	],
-	"license": "MIT",
-	"author": "heiwa4126 <heiwa4126@gmail.com>",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/heiwa4126/cdkoutputs2sh.git"
-	},
-	"bin": {
-		"cdkoutputs2sh": "dist/main.js"
-	},
-	"type": "module",
-	"module": "./dist/main.js",
-	"types": "./dist/main.d.ts",
-	"exports": {
-		".": {
-			"types": "./dist/main.d.ts",
-			"import": "./dist/main.js"
-		}
-	},
-	"scripts": {
-		"preinstall": "pnpm audit",
-		"init": "pnpm i && pnpm run build && pnpm run link",
-		"prepublishOnly": "pnpm run clean && pnpm run build && pnpm run test:run && pnpm run smoke-test",
-		"clean": "rm -rf dist",
-		"build": "tsdown",
-		"link": "mkdir -p node_modules && ln -sfn ../ node_modules/cdkoutputs2sh",
-		"test": "node --test test/main.test.ts",
-		"test:run": "node --test test/main.test.ts",
-		"test:watch": "node --test --watch test/main.test.ts",
-		"format": "oxfmt",
-		"format:all": "pnpm pkg fix --loglevel=error && oxfmt",
-		"lint": "oxlint",
-		"lint:all": "oxlint && tsc --noEmit && actionlint -verbose",
-		"check": "oxfmt && oxlint --fix",
-		"smoke-test": "node dist/main.js -h",
-		"security": "trivy fs --skip-dirs node_modules,cdk.out . && trivy config --skip-dirs node_modules,cdk.out .",
-		"audit": "pnpm audit && trivy fs --scanners vuln package.json"
-	},
-	"devDependencies": {
-		"@types/node": "^26.6.5",
-		"oxfmt": "^0.74.0",
-		"oxlint": "^1.89.0",
-		"tsdown": "^0.23.1",
-		"typescript": "^7.0.2"
-	},
-	"engines": {
-		"node": ">=18"
-	}
+  "name": "cdkoutputs2sh",
+  "version": "0.0.2",
+  "description": "CLI tool and library that converts AWS CDK stack output JSON files into sourceable shell environment variable export scripts",
+  "keywords": [
+    "awscdk",
+    "cli",
+    "github-actions",
+    "sigstore",
+    "trusted-publishing",
+    "tsup",
+    "typescript",
+    "utility"
+  ],
+  "license": "MIT",
+  "author": "heiwa4126 <heiwa4126@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heiwa4126/cdkoutputs2sh.git"
+  },
+  "bin": {
+    "cdkoutputs2sh": "dist/main.js"
+  },
+  "type": "module",
+  "module": "./dist/main.js",
+  "types": "./dist/main.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/main.js"
+    }
+  },
+  "scripts": {
+    "preinstall": "pnpm audit",
+    "init": "pnpm i && pnpm run build && pnpm run link",
+    "prepublishOnly": "pnpm run clean && pnpm run build && pnpm run test:run && pnpm run smoke-test",
+    "clean": "rm -rf dist",
+    "build": "tsdown",
+    "test": "node --test test/main.test.ts",
+    "test:run": "node --test test/main.test.ts",
+    "test:watch": "node --test --watch test/main.test.ts",
+    "format": "oxfmt",
+    "format:all": "pnpm pkg fix --loglevel=error && oxfmt",
+    "lint": "oxlint",
+    "lint:all": "oxlint && tsc --noEmit && actionlint -verbose",
+    "check": "oxfmt && oxlint --fix",
+    "smoke-test": "node dist/main.js -h",
+    "security": "trivy fs --skip-dirs node_modules,cdk.out . && trivy config --skip-dirs node_modules,cdk.out .",
+    "audit": "pnpm audit && trivy fs --scanners vuln package.json"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "oxfmt": "^0.74.0",
+    "oxlint": "^1.89.0",
+    "tsdown": "^0.23.1",
+    "typescript": "^7.0.2",
+    "cdkoutputs2sh": "link:."
+  },
+  "engines": {
+    "node": ">=18"
+  }
 }

@@ -11,6 +11,9 @@ importers:
       '@types/node':
         specifier: ^26.6.5
         version: 26.6.5
+      cdkoutputs2sh:
+        specifier: link:.
+        version: 'link:'
       oxfmt:
         specifier: ^0.74.0
         version: 0.74.0
